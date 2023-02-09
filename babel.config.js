@@ -6,7 +6,7 @@ const config = {
         ['@babel/preset-env', {
             targets: {
                 chrome: 66,
-                firefox: 60,
+                firefox: 47,
                 edge: 42,
                 safari: 12,
             },
@@ -28,6 +28,7 @@ const config = {
         'lodash',
         '@babel/plugin-proposal-class-properties',
         '@babel/plugin-proposal-object-rest-spread',
+        "@babel/plugin-proposal-optional-catch-binding",
         'react-hot-loader/babel',
         'babel-plugin-typescript-to-proptypes',
         [

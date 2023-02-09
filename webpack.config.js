@@ -116,10 +116,10 @@ var config = {
                             name: 'files/[contenthash].[ext]',
                         },
                     },
-                    {
-                        loader: 'image-webpack-loader',
-                        options: {},
-                    },
+                    // {
+                    //     loader: 'image-webpack-loader',
+                    //     options: {},
+                    // },
                 ],
             },
             {
