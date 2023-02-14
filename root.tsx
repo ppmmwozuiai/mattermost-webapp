@@ -14,7 +14,13 @@ __webpack_public_path__ = window.publicPath;
 // basename accordingly.
 window.basename = window.publicPath.substr(0, window.publicPath.length - '/static/'.length);
 
+import ResizeObserver from 'resize-observer-polyfill'
+import PerformanceObserver from '@fastly/performance-observer-polyfill'
+
+window.ResizeObserver = window.ResizeObserver || ResizeObserver;
+window.PerformanceObserver = window.PerformanceObserver || PerformanceObserver;
+
 import('./entry');
 
 // This empty export forces this to be treated as a module by the TS compiler
-export {};
+export { };

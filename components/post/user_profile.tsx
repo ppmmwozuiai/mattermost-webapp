@@ -17,13 +17,13 @@ import PostHeaderCustomStatus from 'components/post_view/post_header_custom_stat
 type Props = {
     post: Post;
     compactDisplay?: boolean;
-    currentUserId: string;
+    currentUserId?: string;
     colorizeUsernames?: boolean;
     enablePostUsernameOverride?: boolean;
     isConsecutivePost?: boolean;
-    isBot: boolean;
+    isBot?: boolean;
     isSystemMessage: boolean;
-    isMobileView: boolean;
+    isMobileView?: boolean;
     location: keyof typeof Locations;
 };
 

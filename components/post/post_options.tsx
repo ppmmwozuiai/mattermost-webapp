@@ -24,8 +24,8 @@ import CommentIcon from 'components/common/comment_icon';
 
 type Props = {
     post: Post;
-    teamId: string;
-    isFlagged: boolean;
+    teamId?: string;
+    isFlagged?: boolean;
     removePost: (post: Post) => void;
     enableEmojiPicker?: boolean;
     isReadOnly?: boolean;
@@ -38,10 +38,10 @@ type Props = {
     shouldShowActionsMenu?: boolean;
     showActionsMenuPulsatingDot?: boolean;
     oneClickReactionsEnabled?: boolean;
-    recentEmojis: Emoji[];
+    recentEmojis?: Emoji[];
     isExpanded?: boolean;
     hover?: boolean;
-    isMobileView: boolean;
+    isMobileView?: boolean;
     hasReplies?: boolean;
     isFirstReply?: boolean;
     isSearchResultsItem?: boolean;
@@ -183,7 +183,7 @@ const PostOptions = (props: Props): JSX.Element => {
             <PostFlagIcon
                 location={props.location}
                 postId={post.id}
-                isFlagged={props.isFlagged}
+                isFlagged={!!props.isFlagged}
             />
         );
     }

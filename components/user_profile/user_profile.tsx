@@ -22,7 +22,7 @@ import SharedUserIndicator from 'components/shared_user_indicator';
 import {generateColor} from './utils';
 
 export type UserProfileProps = {
-    userId: string;
+    userId?: string;
     displayName?: string;
     isBusy?: boolean;
     isShared?: boolean;

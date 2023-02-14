@@ -13,7 +13,7 @@ const url = require('url');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExternalTemplateRemotesPlugin = require('external-remotes-plugin');
 const webpack = require('webpack');
-const {ModuleFederationPlugin} = require('webpack').container;
+const { ModuleFederationPlugin } = require('webpack').container;
 const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -36,9 +36,8 @@ const DEV = targetIsRun || targetIsStats || targetIsDevServer;
 
 const boardsDevServerUrl = process.env.MM_BOARDS_DEV_SERVER_URL ?? 'http://localhost:9006';
 
-const STANDARD_EXCLUDE = [
-    path.join(__dirname, 'node_modules'),
-];
+const include = (...p) => path.resolve(__dirname, ...p)
+const includeModule = (...p) => path.resolve(__dirname, 'node_modules', ...p)
 
 let publicPath = '/static/';
 
@@ -66,8 +65,34 @@ var config = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx|ts|tsx)$/,
-                exclude: STANDARD_EXCLUDE,
+                test: /\.(js|jsx|ts|tsx|mjs)$/,
+                include: [
+                    include('actions'),
+                    include('client'),
+                    include('components'),
+                    include('e2e'),
+                    include('i18n'),
+                    include('packages'),
+                    include('plugins'),
+                    include('reducers'),
+                    include('selectors'),
+                    include('store'),
+                    include('stores'),
+                    include('tests'),
+                    include('types'),
+                    include('utils'),
+                    include('entry.tsx'),
+                    include('root.tsx'),
+                    include('module_registry.ts'),
+                    includeModule('p-queue'),
+                    includeModule('lru-cache'),
+                    includeModule('marked'),
+                    includeModule('luxon'),
+                    includeModule('@floating-ui'),
+                    includeModule('exif2css'),
+                    includeModule('react-window'),
+                    includeModule('rudder-sdk-js')
+                ],
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -192,35 +217,35 @@ var config = {
         }),
         new CopyWebpackPlugin({
             patterns: [
-                {from: 'images/emoji', to: 'emoji'},
-                {from: 'images/worktemplates', to: 'worktemplates'},
-                {from: 'images/img_trans.gif', to: 'images'},
-                {from: 'images/logo-email.png', to: 'images'},
-                {from: 'images/circles.png', to: 'images'},
-                {from: 'images/favicon', to: 'images/favicon'},
-                {from: 'images/appIcons.png', to: 'images'},
-                {from: 'images/warning.png', to: 'images'},
-                {from: 'images/logo-email.png', to: 'images'},
-                {from: 'images/browser-icons', to: 'images/browser-icons'},
-                {from: 'images/cloud', to: 'images'},
-                {from: 'images/welcome_illustration_new.png', to: 'images'},
-                {from: 'images/logo_email_blue.png', to: 'images'},
-                {from: 'images/logo_email_dark.png', to: 'images'},
-                {from: 'images/logo_email_gray.png', to: 'images'},
-                {from: 'images/forgot_password_illustration.png', to: 'images'},
-                {from: 'images/invite_illustration.png', to: 'images'},
-                {from: 'images/channel_icon.png', to: 'images'},
-                {from: 'images/add_payment_method.png', to: 'images'},
-                {from: 'images/add_subscription.png', to: 'images'},
-                {from: 'images/c_avatar.png', to: 'images'},
-                {from: 'images/c_download.png', to: 'images'},
-                {from: 'images/c_socket.png', to: 'images'},
-                {from: 'images/admin-onboarding-background.jpg', to: 'images'},
-                {from: 'images/payment-method-illustration.png', to: 'images'},
-                {from: 'images/cloud-laptop.png', to: 'images'},
-                {from: 'images/cloud-laptop-error.png', to: 'images'},
-                {from: 'images/cloud-laptop-warning.png', to: 'images'},
-                {from: 'images/cloud-upgrade-person-hand-to-face.png', to: 'images'},
+                { from: 'images/emoji', to: 'emoji' },
+                { from: 'images/worktemplates', to: 'worktemplates' },
+                { from: 'images/img_trans.gif', to: 'images' },
+                { from: 'images/logo-email.png', to: 'images' },
+                { from: 'images/circles.png', to: 'images' },
+                { from: 'images/favicon', to: 'images/favicon' },
+                { from: 'images/appIcons.png', to: 'images' },
+                { from: 'images/warning.png', to: 'images' },
+                { from: 'images/logo-email.png', to: 'images' },
+                { from: 'images/browser-icons', to: 'images/browser-icons' },
+                { from: 'images/cloud', to: 'images' },
+                { from: 'images/welcome_illustration_new.png', to: 'images' },
+                { from: 'images/logo_email_blue.png', to: 'images' },
+                { from: 'images/logo_email_dark.png', to: 'images' },
+                { from: 'images/logo_email_gray.png', to: 'images' },
+                { from: 'images/forgot_password_illustration.png', to: 'images' },
+                { from: 'images/invite_illustration.png', to: 'images' },
+                { from: 'images/channel_icon.png', to: 'images' },
+                { from: 'images/add_payment_method.png', to: 'images' },
+                { from: 'images/add_subscription.png', to: 'images' },
+                { from: 'images/c_avatar.png', to: 'images' },
+                { from: 'images/c_download.png', to: 'images' },
+                { from: 'images/c_socket.png', to: 'images' },
+                { from: 'images/admin-onboarding-background.jpg', to: 'images' },
+                { from: 'images/payment-method-illustration.png', to: 'images' },
+                { from: 'images/cloud-laptop.png', to: 'images' },
+                { from: 'images/cloud-laptop-error.png', to: 'images' },
+                { from: 'images/cloud-laptop-warning.png', to: 'images' },
+                { from: 'images/cloud-upgrade-person-hand-to-face.png', to: 'images' },
             ],
         }),
 
@@ -358,7 +383,7 @@ async function initializeModuleFederation() {
 
     async function getRemoteContainers() {
         const products = [
-            {name: 'boards', baseUrl: boardsDevServerUrl},
+            { name: 'boards', baseUrl: boardsDevServerUrl },
         ];
 
         const remotes = {};
@@ -403,10 +428,10 @@ async function initializeModuleFederation() {
             aliases[`${product.name}/manifest`] = false;
         }
 
-        return {remotes, aliases};
+        return { remotes, aliases };
     }
 
-    const {remotes, aliases} = await getRemoteContainers();
+    const { remotes, aliases } = await getRemoteContainers();
 
     const moduleFederationPluginOptions = {
         name: 'mattermost_webapp',

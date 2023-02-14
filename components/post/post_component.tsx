@@ -54,11 +54,11 @@ import PostOptions from './post_options';
 
 export type Props = {
     post: Post;
-    teamId: string;
-    currentUserId: string;
+    teamId?: string;
+    currentUserId?: string;
     compactDisplay?: boolean;
     colorizeUsernames?: boolean;
-    isFlagged: boolean;
+    isFlagged?: boolean;
     previewCollapsed?: string;
     previewEnabled?: boolean;
     isEmbedVisible?: boolean;
@@ -69,17 +69,17 @@ export type Props = {
     channelIsArchived?: boolean;
     isConsecutivePost?: boolean;
     isLastPost?: boolean;
-    recentEmojis: Emoji[];
-    center: boolean;
+    recentEmojis?: Emoji[];
+    center?: boolean;
     handleCardClick?: (post: Post) => void;
     togglePostMenu?: (opened: boolean) => void;
     channelName?: string;
-    displayName: string;
+    displayName?: string;
     teamDisplayName?: string;
     teamName?: string;
     channelType?: string;
     a11yIndex?: number;
-    isBot: boolean;
+    isBot?: boolean;
     hasReplies?: boolean;
     isFirstReply?: boolean;
     previousPostIsComment?: boolean;
@@ -510,7 +510,7 @@ const PostComponent = (props: Props): JSX.Element => {
                     </div>
                 }
                 <PostPreHeader
-                    isFlagged={props.isFlagged}
+                    isFlagged={!!props.isFlagged}
                     isPinned={post.is_pinned}
                     skipPinned={props.location === 'SEARCH' && props.isPinnedPosts}
                     skipFlagged={props.location === 'SEARCH' && props.isFlaggedPosts}

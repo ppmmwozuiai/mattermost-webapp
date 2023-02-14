@@ -10,7 +10,7 @@ import {Preferences} from 'utils/constants';
 import PostList from './post_list';
 
 interface Props {
-    lastViewedAt: number;
+    lastViewedAt?: number;
     channelLoading: boolean;
     channelId: string;
     focusedPostId?: string;
@@ -29,7 +29,7 @@ export default class PostView extends React.PureComponent<Props, State> {
         super(props);
         const shouldStartFromBottomWhenUnread = this.props.unreadScrollPosition === Preferences.UNREAD_SCROLL_POSITION_START_FROM_NEWEST;
         this.state = {
-            unreadChunkTimeStamp: props.lastViewedAt,
+            unreadChunkTimeStamp: props.lastViewedAt||0,
             shouldStartFromBottomWhenUnread,
             loaderForChangeOfPostsChunk: false,
             channelLoading: props.channelLoading,
